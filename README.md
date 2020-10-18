@@ -31,6 +31,12 @@ k8s-crawler-operator是一个部署在k8s集群上operator, 实现了分布式�
        make deploy IMG=quay.io/zhu733756/crawler-operator:v0.0.1
       ```
 
+## 激活job回收机制
+
+- 在master节点上的以下配置添加启动参数`- --feature-gates=TTLAfterFinished=true`
+    - `/etc/kubernetes/manifests/kube-controller-manager.yaml`
+    - `etc/kubernetes/manifests/kube-apiserver.yaml`
+
 ## 部署样例
 
 - 样例目录在`config/samples`，自定义你的 `run-list`, 并修改资源配置
@@ -150,6 +156,7 @@ k8s-crawler-operator是一个部署在k8s集群上operator, 实现了分布式�
     - name: CATEGORY
         value: "run list in this project"
     ```
+
 - todo
     - 日志收集
     - 添加爬虫自定义参数
