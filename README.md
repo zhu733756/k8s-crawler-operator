@@ -35,7 +35,7 @@ k8s-crawler-operator是一个部署在k8s集群上operator, 实现了分布式�
 
 - 在master节点上的以下配置添加启动参数`- --feature-gates=TTLAfterFinished=true`
     - `/etc/kubernetes/manifests/kube-controller-manager.yaml`
-    - `etc/kubernetes/manifests/kube-apiserver.yaml`
+    - `/etc/kubernetes/manifests/kube-apiserver.yaml`
 
 ## 部署样例
 
