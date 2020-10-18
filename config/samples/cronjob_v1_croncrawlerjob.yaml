@@ -1,0 +1,32 @@
+apiVersion: cronjob.crawler.com/v1
+kind: CronCrawlerJob
+metadata:
+  name: crawler-newspapers-test
+  namespace: kube-crawler
+spec:
+  # job, 一次性任务
+  # cronjob，定时发布任务
+  jobType: "job" 
+  schedule: "*/10 * * * *"
+  duration: "3s"
+  publisher:
+    publisherTTL: 600
+  consumer:
+    consumerTTL: 600
+    parallelism: 2
+  env:
+    - name: GIT_REPO
+      # 爬虫代码git地址
+      value: "your git repo of spiders"
+    - name: GIT_BRANCH
+      # 爬虫代码分支
+      value: "branch of your repo"
+    - name: REDIS_URL
+      # redis共享队列
+      value: "redis://redis-url/0"
+    - name: PROJECT
+      # 爬虫代码中你本次想使用的爬虫项目名称
+      value: "newspapers"
+    - name: CATEGORY
+      # 对应于run-list【config/samples.run_list】中本次爬虫运行的清单，使用configmap暴露给pod
+      value: "test"

@@ -1,0 +1,19 @@
+## Append samples you want in your CSV to this file as resources ##
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kube-crawler
+resources:
+- cronjob_v1_croncrawlerjob.yaml
+configMapGenerator:
+- name: crawler-run-list
+  files:
+  - newspapers-test=run_list/newspapers/test
+  - newspapers-main=run_list/newspapers/main
+  - website-test=run_list/website/test
+  - website-main=run_list/website/main
+generatorOptions:
+  # disableNameSuffixHash is true disables the default behavior of adding a
+  #   # suffix to the names of generated resources that is a hash of
+  #     # the resource contents.
+  disableNameSuffixHash: true
+# +kubebuilder:scaffold:manifestskustomizesamples
